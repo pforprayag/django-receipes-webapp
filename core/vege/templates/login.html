@@ -1,0 +1,40 @@
+{% extends 'base.html'%} {% block start%}
+<div class="container mt-5">
+  <h1 class="text-center">Login</h1>
+  <!-- Backedn thi frontend ma data lavva mate post method use thase -->
+  <!-- encytype : for upload image  -->
+  <form class="col-6 mx-auto shadow-lg p-5"
+  method="post"
+  enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if messages %}
+    <div class="alert alert-primary" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </div>
+    <ul class="messages">
+   
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}></li>
+  
+    </ul>
+{% endif %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+    </div>
+    
+    <p>Don't have a account ? <a href="/register/">Register</a></p>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+
+</div>
+{% endblock%}

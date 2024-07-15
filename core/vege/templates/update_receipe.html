@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block start %}
+<div class="container mt-5">
+
+  <h1 class="text-center">Update Receipes</h1>
+ <!-- Backedn thi frontend ma data lavva mate post method use thase -->
+  <!-- encytype : for upload image  -->
+  <form class="col-6 mx-auto shadow-lg p-5" method="post" enctype="multipart/form-data">
+    <!-- frontend thi backend ma data send krva mate  -->
+    {% csrf_token %}  
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+      <input name="receipe_name" value="{{receipe.receipe_name}}" required type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Receipe Description</label>
+      <textarea name="receipe_description" value="" class="form-control" id="exampleInputPassword1">{{receipe.receipe_description}} </textarea>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Receipe Image</label>
+      <input name="receipe_image" type="file" value="{{receipe.receipe_image}}" class="form-control"> 
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+
+</div>
+{% endblock %}

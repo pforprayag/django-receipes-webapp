@@ -1,0 +1,99 @@
+{% extends 'base.html'%} {% block start%}
+<div class="container mt-5">
+  <h1 class="text-center">Receipes</h1>
+  <!-- Backedn thi frontend ma data lavva mate post method use thase -->
+  <!-- encytype : for upload image  -->
+  <form
+    class="col-6 mx-auto shadow-lg p-5"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <!-- frontend thi backend ma data send krva mate  -->
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+      <input
+        name="receipe_name"
+        required
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label"
+        >Receipe Description</label
+      >
+      <textarea
+        name="receipe_description"
+        class="form-control"
+        id="exampleInputPassword1"
+      >
+      </textarea>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label"
+        >Receipe Image</label
+      >
+      <input name="receipe_image" type="file" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+
+  <div class="mt-5">
+    <div class="mx-auto col-6">
+      <form action="">
+        <div class="mb-3 flex gap-2">
+          <input
+            name="search"
+            type="text"
+            class="form-control"
+            placeholder="Search Receipe"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <button class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Receipe Name</th>
+        <th scope="col">Receipe Description</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for receipe in receipes%}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{receipe.receipe_name}}</td>
+        <td>{{receipe.receipe_description}}</td>
+        <td>
+          <img
+            src="/media/{{receipe.receipe_image}}"
+            style="height: 200px; width: 200px; padding: 20px"
+            alt="Not upload"
+          />
+        </td>
+        <td>
+          <a href="/delete_receipe/{{receipe.id}}/" class="btn btn-danger mt-4"
+            >Delete</a
+          >
+
+          <a href="/update_receipe/{{receipe.id}}/" class="btn btn-success mt-4"
+            >Update</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock%}
